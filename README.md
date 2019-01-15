@@ -64,6 +64,7 @@ Options
 | progressColor    | change color of foreground circle as percents changed（{ 50: '#FF6C00', 60: '#FF6C00'}） | object  | null |
 | halfCircle | draw half circle see example bellow | boolean | false |
 | animateInView | animate circle on scroll into view | boolean | false |
+| strokeLinecap | used shape at the end | string | butt |
 
 ### Percentage Text
 | Option        | Description           | Type           | Default  |
@@ -209,6 +210,16 @@ Example with icon:
 	    animationStep: 5,
 	    percent: 80,
 	    beforePercent: 'f0a0'
+	});
+
+Circle with rounded ends
+------------------
+
+Example:
+
+    $("#test-circle1").circliful({
+	    percent: 80,
+	    strokeLinecap: 'round'
 	});
 
 Examples
