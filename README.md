@@ -91,8 +91,9 @@ Options
 | decimals | number of decimal places to show | integer | 0 |
 | alwaysDecimals | shows decimals while animating instead of only at the end or if less than 1 | boolean | false |
 | title | title of the circle | string | Circle Chart |
-|description | description of the circle | string | '' |
-|beforePercent | sign or icon before percentage | string | '' |
+| description | description of the circle | string | '' |
+| beforePercent | sign or icon before percentage | string | '' |
+| showPercent | when set to 0 no percentage is shown | integer | 1 |
 
 ### Icon
 | Option        | Description           | Type           | Default  |

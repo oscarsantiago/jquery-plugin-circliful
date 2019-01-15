@@ -24,7 +24,6 @@
             iconPosition: 'top',
             iconDecoration: true,
             target: 0,
-            start: 0,
             showPercent: 1,
             percentageTextSize: 22,
             percentageX: 100,
@@ -139,6 +138,7 @@
 
             if (settings.halfCircle) {
                 var rotate = 'transform="rotate(-180,100,100)"';
+                var hideNumber = (settings.showPercent === 0 ? 'display:none' : '');
                 circleContainer
                     .addClass('svg-container')
                     .append(
@@ -149,7 +149,10 @@
                             '<circle class="circle" cx="100" cy="100" r="57" fill="none" stroke="' + settings.foregroundColor + '" stroke-width="' + settings.foregroundBorderWidth + '" stroke-dasharray="0,20000" ' + rotate + ' />' +
                             '<circle cx="100" cy="100" r="' + settings.pointSize + '" fill="' + settings.pointColor + '" clip-path="url(#cut-off-bottom)" transform="rotate(-90,100,100)" />' +
                             icon +
-                            '<text class="timer" text-anchor="middle" x="' + percentageX + '" y="' + percentageY + '" style="font-size: ' + settings.percentageTextSize + 'px; ' + additionalCss + ';' + settings.textAdditionalCss + '" fill="' + settings.fontColor + '"><tspan class="number">' + (settings.replacePercentageByText === null ? 0 : settings.replacePercentageByText) + '</tspan><tspan class="percent">' + (settings.noPercentageSign || settings.replacePercentageByText !== null ? '' : '%') + '</tspan></text>')
+                            '<text class="timer" text-anchor="middle" x="' + percentageX + '" y="' + percentageY + '" style="font-size: ' + settings.percentageTextSize + 'px; ' + additionalCss + ';' + settings.textAdditionalCss + '" fill="' + settings.fontColor + '">' +
+                            '<tspan class="number" style="' + hideNumber + '">' + (settings.replacePercentageByText === null ? 0 : settings.replacePercentageByText) + '</tspan>' +
+                            '<tspan class="percent">' + (settings.noPercentageSign || settings.replacePercentageByText !== null ? '' : '%') + '</tspan>' +
+                            '</text>')
                     );
             } else {
                 drawCircles();
@@ -162,7 +165,6 @@
             var angleIncrement = settings.animationStep;
             var last = 0;
             var summary = 0;
-            var oneStep = 0;
             var text = percent;
             var calculateFill = (360 / 100 * percent);
 
@@ -172,11 +174,6 @@
 
             if (settings.replacePercentageByText !== null) {
                 text = settings.replacePercentageByText;
-            }
-
-            if (settings.start > 0 && settings.target > 0) {
-                percent = settings.start / (settings.target / 100);
-                oneStep = settings.target / 100;
             }
 
             if (settings.animation === 1 || settings.animateInView) {
@@ -253,7 +250,6 @@
                         }
                     } else {
                         angle += angleIncrement;
-                        summary += oneStep;
                     }
                     if (settings.halfCircle) {
                         if (angle * 2 / (circleRadius / 100) >= percent && last === 1) {
@@ -384,6 +380,7 @@
                             '<circle class="circle" id="circle' + (index + 1) + '" data-percent="' + percent + '" cx="100" cy="100" r="' + radius + '" class="border" fill="none" stroke="' + color + '" stroke-width="' + settings.foregroundBorderWidth + '" stroke-dasharray="' + calculateFillMulti + ',20000" transform="rotate(' + rotate + ',100,100)" />';
                     }
 
+                    var hideNumber = (settings.showPercent === 0 ? 'display:none' : '');
                     circleContainer
                         .addClass('svg-container')
                         .append(
@@ -392,7 +389,7 @@
                                 circles +
                                 icon +
                                 '<text class="timer" text-anchor="middle" x="' + percentageX + '" y="' + percentageY + '" style="font-size: ' + settings.percentageTextSize + 'px; ' + additionalCss + ';' + settings.textAdditionalCss + '" fill="' + settings.fontColor + '">' +
-                                '<tspan class="number">' + (settings.replacePercentageByText === null ? 0 : settings.replacePercentageByText) + '</tspan>' +
+                                '<tspan class="number" style="' + hideNumber + '">' + (settings.replacePercentageByText === null ? 0 : settings.replacePercentageByText) + '</tspan>' +
                                 '<tspan class="percent">' + (settings.noPercentageSign || settings.replacePercentageByText !== null ? '' : '%') + '</tspan>' +
                                 '</text>')
                         );
@@ -410,6 +407,8 @@
                         }
                     }
 
+                    var hideNumber = (settings.showPercent === 0 ? 'display:none' : '');
+
                     circleContainer
                         .addClass('svg-container')
                         .append(
@@ -421,7 +420,7 @@
                                 icon +
                                 '<text class="timer" text-anchor="middle" x="' + percentageX + '" y="' + percentageY + '" style="font-size: ' + settings.percentageTextSize + 'px; ' + additionalCss + ';' + settings.textAdditionalCss + '" fill="' + settings.fontColor + '">' +
                                 beforePercent +
-                                '<tspan class="number">' + (settings.replacePercentageByText === null ? 0 : settings.replacePercentageByText) + '</tspan>' +
+                                '<tspan class="number" style="' + hideNumber + '">' + (settings.replacePercentageByText === null ? 0 : settings.replacePercentageByText) + '</tspan>' +
                                 '<tspan class="percent">' + (settings.noPercentageSign || settings.replacePercentageByText !== null ? '' : '%') + '</tspan>' +
                                 '</text>')
                         );
