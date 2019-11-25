@@ -1,3 +1,5 @@
+> ***This plugin will be completely rewritten in branch without-dependencies, work in progress*** 
+
 jquery-plugin-circliful
 =======================
 
